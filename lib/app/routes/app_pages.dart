@@ -20,11 +20,11 @@ class AppPages {
       page: () => const HomeView(),
       binding: HomeBinding(),
       children: [
-        GetPage(
-          name: _Paths.HOME,
-          page: () => const HomeView(),
-          binding: HomeBinding(),
-        ),
+        // GetPage(
+        //   name: _Paths.HOME,
+        //   page: () => const HomeView(),
+        //   binding: HomeBinding(),
+        // ),
       ],
     ),
     GetPage(

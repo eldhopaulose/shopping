@@ -1,10 +1,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:shopping/app/data/colors.dart';
+import 'package:shopping/app/widgets/favorite_icon.dart';
 import 'package:shopping/app/widgets/offer_card.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+
+  final int Id;
+ 
+  const ProductCard({Key? key, required this.Id,}):super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +45,11 @@ class ProductCard extends StatelessWidget {
               top: 10,
               left: 10,
               child: OfferCard(),
+            ),
+            Positioned(
+              top: 10,
+              right: 10,
+              child: FavoriteIcon(id: Id,),
             ),
             Positioned(
               top: MediaQuery.of(context).size.width > 600 ? 250 : 220,

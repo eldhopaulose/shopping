@@ -31,21 +31,26 @@ class HomeView extends GetView<HomeController> {
                             MediaQuery.of(context).size.width < 600 ? 0.57 : 1,
                       ),
                       children: const [
-                        ProductCard(),
-                        ProductCard(),
-                        ProductCard(),
-                        ProductCard(),
-                        ProductCard(),
-                        ProductCard(),
-                        ProductCard(),
-                        ProductCard(),
+                        ProductCard(Id: 1,),
+                        ProductCard(Id: 2,),
+                        ProductCard(Id: 3,),
+                        ProductCard(Id: 4,),
+                        ProductCard(Id: 5,),
+                        ProductCard(Id: 6,),
+                        ProductCard(Id: 7,),
+                        ProductCard(Id: 8,),
+                        ProductCard(Id: 9,),
+                        ProductCard(Id: 10,),
+                        ProductCard(Id: 11,),
+                       
+               
                       ]),
                 ),
-              ],
+              ],    
             ),
           ),
         ),
       ),
     );
   }
-}
+}         
