@@ -14,4 +14,5 @@ class AppColor {
   static const black = Colors.black;
   static const white = Colors.white;
   static const darkBlue = Color.fromARGB(255, 141, 148, 157);
+  static const deepOrange =Colors.deepOrange;
 }

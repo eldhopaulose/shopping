@@ -10,6 +10,7 @@ dependencies:
   get: 4.6.6
   bottom_navy_bar: ^6.0.0
   smooth_page_indicator: ^1.1.0
+  google_fonts: ^6.2.0
   flutter: 
     sdk: flutter
 
