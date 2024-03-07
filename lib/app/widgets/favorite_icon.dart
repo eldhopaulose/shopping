@@ -14,16 +14,21 @@ final int id;
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       builder: (controller) {
+        print(id);
         return  Obx(() {
       final isFavorite = controller.isFavorite(id);
-      return IconButton(
-        icon: Icon(
-          isFavorite ? Icons.favorite : Icons.favorite_border,
-          color: Colors.red,
+      return SizedBox(
+        height: 40,
+        child: IconButton(
+          icon: Icon(
+            isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: Colors.yellow, 
+            
+          ),
+          onPressed: () {
+            controller.toggleFavorite(id);
+          },
         ),
-        onPressed: () {
-          controller.toggleFavorite(id);
-        },
       );
     });
   });

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/bottomnav/bindings/bottomnav_binding.dart';
+import '../modules/bottomnav/views/bottomnav_view.dart';
 import '../modules/cart/bindings/cart_binding.dart';
 import '../modules/cart/views/cart_view.dart';
 import '../modules/details/bindings/details_binding.dart';
@@ -16,7 +18,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.BOTTOMNAV;
 
   static final routes = [
     GetPage(
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOTTOMNAV,
+      page: () => const BottomnavView(),
+      binding: BottomnavBinding(),
     ),
   ];
 }

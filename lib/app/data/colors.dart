@@ -7,6 +7,7 @@ class AppColor {
   static const lightOrange = Color(0xFFf8b89a);
 
   static const darkGrey = Color(0xFFA6A3A0);
+  static const green =Colors.green;
   static const lightGrey = Color(0xFFE5E6E8);
 
   static const blue = Color.fromARGB(255, 211, 220, 229);

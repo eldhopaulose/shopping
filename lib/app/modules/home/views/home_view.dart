@@ -126,7 +126,7 @@ class HomeView extends GetView<HomeController> {
                             child: Text(
                                      "SEE ALL",
                                       style: TextStyle(
-                                        color: Colors.orange),
+                                        color: Colors.green),
                                       ),
                           ),
                         ],
