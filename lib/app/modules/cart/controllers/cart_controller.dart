@@ -1,23 +1,39 @@
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-  //TODO: Implement CartController
+  var cartItems = <CartItem>[].obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void addToCart(CartItem item) {
+    cartItems.add(item);
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void removeFromCart(CartItem item) {
+    cartItems.remove(item);
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void increaseItemQuantity(CartItem item) {
+    // Implement increase item quantity logic here
   }
 
-  void increment() => count.value++;
+  void decreaseItemQuantity(CartItem item) {
+    // Implement decrease item quantity logic here
+  }
+
+  void buyNow() {
+    // Implement buy now logic here
+  }
+
+  double get totalPrice {
+    // Calculate total price logic here
+    return 0.0; // Placeholder, replace with actual logic
+  }
+}
+
+class CartItem {
+  final String id;
+  final String title;
+  final int quantity;
+  final double price;
+
+  CartItem({required this.id, required this.title, required this.quantity, required this.price});
 }

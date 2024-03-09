@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopping/app/modules/details/views/details_view.dart';
 import 'package:shopping/app/widgets/categories.dart';
 import 'package:shopping/app/widgets/product_card.dart';
 import '../controllers/home_controller.dart';
@@ -124,8 +125,10 @@ class HomeView extends GetView<HomeController> {
                               // Handle your onTap here.
                             },
                             child: Text(
-                                     "SEE ALL",
+                                     "See All",
                                       style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
                                         color: Colors.green),
                                       ),
                           ),
@@ -167,8 +170,13 @@ class HomeView extends GetView<HomeController> {
                             MediaQuery.of(context).size.width < 600 ? 0.57 : 1,
                         physics: NeverScrollableScrollPhysics(),
                         children: List.generate(20, (index) {
-                          return ProductCard(
-                            Id: index,
+                          return InkWell(
+                            onTap: () {
+                          Get.to(DetailPageView());
+                            },
+                            child: ProductCard(
+                              Id: index,
+                            ),
                           );
                         }),
                       ),

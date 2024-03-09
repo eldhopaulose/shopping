@@ -8,7 +8,7 @@ List<Widget> buildScreens() {
         return [
           const HomeView(),
           const FavoriteView(),
-          const CartView(),
+           CartView(),
           const ProfileView()
         ];
     }

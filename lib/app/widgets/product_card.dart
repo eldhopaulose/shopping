@@ -46,14 +46,13 @@ class ProductCard extends StatelessWidget {
               left: 10,
               child: OfferCard(),
             ),
-            Positioned(
-              top: 10,
-              right: 10,
-           
-              child: SizedBox(
-                height: 40,
-                child: FavoriteIcon(id: Id,)),
-            ),
+            // Positioned(
+            //   top: 10,
+            //   right: 10,
+            //   child: SizedBox(
+            //     height: 40,
+            //     child: FavoriteIcon(id: Id,)),
+            // ),
             Positioned(
               top: MediaQuery.of(context).size.width > 600 ? 250 : 220,
               bottom: 0,

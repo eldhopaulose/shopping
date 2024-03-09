@@ -21,8 +21,11 @@ final int id;
         height: 40,
         child: IconButton(
           icon: Icon(
-            isFavorite ? Icons.favorite : Icons.favorite_border,
-            color: Colors.yellow, 
+            isFavorite ?
+             Icons.favorite 
+             :
+              Icons.favorite_border,
+            color: Colors.red, 
             
           ),
           onPressed: () {
