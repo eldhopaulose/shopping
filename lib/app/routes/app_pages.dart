@@ -40,7 +40,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CART,
-      page: () =>  CartView(),
+      page: () => CartView(),
       binding: CartBinding(),
     ),
     GetPage(
@@ -58,5 +58,6 @@ class AppPages {
       page: () => const BottomnavView(),
       binding: BottomnavBinding(),
     ),
+    
   ];
 }

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping/app/modules/home/controllers/home_controller.dart';
@@ -17,21 +18,18 @@ final int id;
         print(id);
         return  Obx(() {
       final isFavorite = controller.isFavorite(id);
-      return SizedBox(
-        height: 40,
-        child: IconButton(
-          icon: Icon(
-            isFavorite ?
-             Icons.favorite 
-             :
-              Icons.favorite_border,
-            color: Colors.red, 
-            
-          ),
-          onPressed: () {
-            controller.toggleFavorite(id);
-          },
+      return IconButton(
+        icon: Icon(
+          isFavorite.value ?
+           Icons.favorite 
+           :
+            Icons.favorite_border,
+          color: Colors.red, 
+          
         ),
+        onPressed: () {
+          controller.toggleFavorite(id);
+        },
       );
     });
   });

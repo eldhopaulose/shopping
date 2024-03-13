@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-   var favorites = <int>[1].obs;
+   var favorites = <int>[];
 
   final count = 0.obs;
   @override
@@ -23,17 +23,21 @@ class HomeController extends GetxController {
 
 
 
-  bool isFavorite(int productId) {
-    return favorites.contains(productId);
+  RxBool isFavorite(int productId) {
+    return favorites.contains(productId).obs;
   }
 
-  void toggleFavorite(int productId) {
-    if (favorites.contains(productId)) {
-      favorites.remove(productId);
-    } else {
-      favorites.add(productId);
-    }
+  
+
+ void toggleFavorite(int productId) {
+  print(productId);
+  if (favorites.contains(productId)) {
+    favorites.remove(productId);
+  } else {
+    favorites.add(productId);
   }
+}
+
 
 
 }

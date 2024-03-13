@@ -1,17 +1,24 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shopping/app/data/colors.dart';
-import 'package:shopping/app/widgets/favorite_icon.dart';
+import 'package:shopping/app/modules/home/controllers/home_controller.dart';
+//import 'package:shopping/app/widgets/favorite_icon.dart';
 import 'package:shopping/app/widgets/offer_card.dart';
 
 class ProductCard extends StatelessWidget {
-
   final int Id;
- 
-  const ProductCard({Key? key, required this.Id,}):super(key: key);
+
+  const ProductCard({
+    Key? key,
+    required this.Id,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    
+    final controller = Get.put(HomeController());
+    final isFavorite = controller.isFavorite(Id);
+    
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -46,13 +53,22 @@ class ProductCard extends StatelessWidget {
               left: 10,
               child: OfferCard(),
             ),
-            // Positioned(
-            //   top: 10,
-            //   right: 10,
-            //   child: SizedBox(
-            //     height: 40,
-            //     child: FavoriteIcon(id: Id,)),
-            // ),
+           Positioned(
+              top: 10,
+              right: 10,
+              child: Obx(() => IconButton(
+              icon: Icon(
+              controller.isFavorite(Id).value ? Icons.favorite : Icons.favorite_border,
+              color: Colors.red,
+              ),
+              onPressed: () {
+              controller.toggleFavorite(Id);
+              print(Id);
+              },
+              ),
+            )
+          ),
+
             Positioned(
               top: MediaQuery.of(context).size.width > 600 ? 250 : 220,
               bottom: 0,

@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 import 'package:shopping/app/data/colors.dart';
@@ -143,23 +142,21 @@ class DetailPageView extends GetView<DetailsController> {
                 height: 10,
               ),
               SingleChildScrollView(
-                child: Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CommonButton(
-                        btnButtonWidth: double.infinity,
-                        btnText: 'Buy Now',
-                        btnHeight: 50,
-                        btnOnPressed: () {
-                         // Get.to(EditPageView());
-                        },
-                      ),
-                      SizedBox(
-                        height: 10,
-                      )
-                    ],
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CommonButton(
+                      btnButtonWidth: double.infinity,
+                      btnText: 'Buy Now',
+                      btnHeight: 50,
+                      btnOnPressed: () {
+                       // Get.to(EditPageView());
+                      },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    )
+                  ],
                 ),
               ),
             ],

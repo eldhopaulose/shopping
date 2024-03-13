@@ -11,6 +11,7 @@ class FavoriteView extends GetView<FavoriteController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.white, // Added this line
         elevation: 0.0, // Added this line
