@@ -210,7 +210,9 @@ class HomeView extends GetView<HomeController> {
                                   controller.selectedCategory.value == 'All',
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
-                                controller.fetchCustomerProductByCatc('');
+                                Future.delayed(Duration(seconds: 5), () {
+                                  controller.onReady();
+                                });
                               },
                             ),
                             Categories(
@@ -243,7 +245,7 @@ class HomeView extends GetView<HomeController> {
                             Categories(
                               categoryName: 'Curry Powders',
                               isSelected: controller.selectedCategory.value ==
-                                  'Curry Powder',
+                                  'Curry Powders',
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
                                 controller.fetchCustomerProductByCatc(p0);
@@ -296,6 +298,7 @@ class HomeView extends GetView<HomeController> {
                                   physics: NeverScrollableScrollPhysics(),
                                   children: List.generate(
                                       snapshot.data!.products!.length, (index) {
+                                    final a = snapshot.data!.products![index];
                                     // Your code here
                                     return Stack(
                                       children: [
@@ -308,23 +311,32 @@ class HomeView extends GetView<HomeController> {
                                             onTap: () {
                                               Get.to(() => DetailPageView());
                                             },
-                                            child: ProductCard(
-                                              name: snapshot.data!
-                                                      .products?[index].name ??
-                                                  '',
-                                              price: snapshot.data!
-                                                      .products?[index].price ??
-                                                  '',
-                                              disprice: snapshot
-                                                      .data!
-                                                      .products?[index]
-                                                      .discount ??
-                                                  '',
-                                              image: snapshot
-                                                      .data!
-                                                      .products?[index]
-                                                      .image?[0] ??
-                                                  '',
+                                            child: StreamBuilder(
+                                              stream: controller
+                                                  .fetchCustomerProductLikede,
+                                              builder: (context, snapshot) {
+                                                return ProductCard(
+                                                  name: a.name ?? '',
+                                                  price: a.price ?? '',
+                                                  disprice: a.discount ?? '',
+                                                  image: a.image?[0] ?? '',
+                                                  onPressed: () async {
+                                                    controller
+                                                        .onlikeProduct(
+                                                            a.sId.toString())
+                                                        .then((_) async {
+                                                      // Call the uploadImages function to upload the selected images
+                                                      await controller
+                                                          .fetchCustomerProductLiked();
+                                                    });
+
+                                                    print('aaaaaaaaa');
+                                                  },
+                                                  productId: a.sId.toString(),
+                                                  likedId: snapshot
+                                                      .data!.likedProducts!,
+                                                );
+                                              },
                                             ),
                                           ),
                                         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopping/app/data/colors.dart';
 import 'package:shopping/app/modules/home/controllers/home_controller.dart';
+import 'package:shopping/app/networks/network_model/res/customer_product_like.dart';
 //import 'package:shopping/app/widgets/favorite_icon.dart';
 import 'package:shopping/app/widgets/offer_card.dart';
 
@@ -10,6 +11,10 @@ class ProductCard extends StatelessWidget {
   final String price;
   final String disprice;
   final String image;
+  final String productId;
+  final List likedId;
+
+  final Function onPressed;
 
   const ProductCard({
     Key? key,
@@ -17,12 +22,16 @@ class ProductCard extends StatelessWidget {
     required this.price,
     required this.disprice,
     required this.image,
+    required this.onPressed,
+    required this.productId,
+    required this.likedId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
-    final isFavorite = controller.isFavorite(1);
+
+    print(likedId);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -59,21 +68,27 @@ class ProductCard extends StatelessWidget {
               child: OfferCard(),
             ),
             Positioned(
-                top: 10,
-                right: 10,
-                child: Obx(
-                  () => IconButton(
-                    icon: Icon(
-                      controller.isFavorite(1).value
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: Colors.red,
-                    ),
-                    onPressed: () {
-                      controller.toggleFavorite(1);
-                    },
-                  ),
-                )),
+              top: 10,
+              right: 10,
+              child: IconButton(
+                icon: Icon(
+                  likedId.any((product) =>
+                          product.productId.toString() == productId)
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  color: Colors.red,
+                ),
+                onPressed: () {
+                  productId.isNotEmpty
+                      ? controller.onUnlikeClick(
+                          productId) // If already liked, unlike it
+                      : null;
+                  productId.isNotEmpty
+                      ? controller.onlikeProduct(productId)
+                      : null;
+                },
+              ),
+            ),
             Positioned(
               top: MediaQuery.of(context).size.width > 600 ? 250 : 220,
               bottom: 0,

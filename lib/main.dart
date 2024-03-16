@@ -6,7 +6,7 @@ import 'package:shopping/app/networks/network_model/res/customer_login_res.dart'
 import 'app/routes/app_pages.dart';
 
 void main() {
-  Get.lazyPut(() => CustomerLoginRes());
+  Get.put(CustomerLoginRes());
 
   runApp(
     GetMaterialApp(

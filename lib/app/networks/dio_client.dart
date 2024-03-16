@@ -49,7 +49,9 @@ class DioClient {
           break;
         case ReqType.POST:
           response = await _dio.post(
-            "$BASE_URl/${endPoints.path()}",
+            queryParameters != null
+                ? "$BASE_URl/${endPoints.path()}/$queryParameters"
+                : "$BASE_URl/${endPoints.path()}",
             data: data,
           );
           break;
