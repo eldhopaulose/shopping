@@ -39,13 +39,16 @@ class HomeController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    fetchCustomerProductByCatc('');
+    if (selectedCategory.value == 'All') {
+      fetchCustomerProductByCatc('');
+    } else {
+      fetchCustomerProductByCatc(selectedCategory.value);
+    }
   }
 
   @override
   void onClose() {
     super.onClose();
-    _fetchCustomerProductByCat.close();
   }
 
   Future<CustomerGetNameRes?> featchName() async {

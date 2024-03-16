@@ -210,9 +210,9 @@ class HomeView extends GetView<HomeController> {
                                   controller.selectedCategory.value == 'All',
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
-                                Future.delayed(Duration(seconds: 5), () {
-                                  controller.onReady();
-                                });
+
+                                controller.onReady();
+                                controller.onReady();
                               },
                             ),
                             Categories(
@@ -221,7 +221,8 @@ class HomeView extends GetView<HomeController> {
                                   'Cotton Candy ',
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
-                                controller.fetchCustomerProductByCatc(p0);
+                                controller.onReady();
+                                controller.onReady();
                               },
                             ),
                             Categories(
@@ -230,7 +231,8 @@ class HomeView extends GetView<HomeController> {
                                   'Pop Corn ',
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
-                                controller.fetchCustomerProductByCatc(p0);
+                                controller.onReady();
+                                controller.onReady();
                               },
                             ),
                             Categories(
@@ -239,7 +241,8 @@ class HomeView extends GetView<HomeController> {
                                   'Dry Fruits',
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
-                                controller.fetchCustomerProductByCatc(p0);
+                                controller.onReady();
+                                controller.onReady();
                               },
                             ),
                             Categories(
@@ -248,7 +251,8 @@ class HomeView extends GetView<HomeController> {
                                   'Curry Powders',
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
-                                controller.fetchCustomerProductByCatc(p0);
+                                controller.onReady();
+                                controller.onReady();
                               },
                             ),
                             Categories(
@@ -257,7 +261,8 @@ class HomeView extends GetView<HomeController> {
                                   controller.selectedCategory.value == 'Spices',
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
-                                controller.fetchCustomerProductByCatc(p0);
+                                controller.onReady();
+                                controller.onReady();
                               },
                             ),
                             Categories(
@@ -266,7 +271,8 @@ class HomeView extends GetView<HomeController> {
                                   'Kerala Special',
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
-                                controller.fetchCustomerProductByCatc(p0);
+                                controller.onReady();
+                                controller.onReady();
                               },
                             ),
                           ],
