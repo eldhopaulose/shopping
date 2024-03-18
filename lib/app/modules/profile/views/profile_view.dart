@@ -11,6 +11,8 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     Get.put(ProfileController());
+    controller.onInit();
+    controller.getAdress();
     return Scaffold(
       //backgroundColor: Colors.black,
       appBar: AppBar(
@@ -125,8 +127,13 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       actions: <Widget>[
                         TextButton(
-                          child: Text('Cancel'),
+                          child: Text('Featch Adress'),
                           onPressed: () {
+                            controller.getAdress();
+                            controller.getAdress();
+
+                            controller.onInit();
+
                             Navigator.of(context).pop();
                           },
                         ),
@@ -134,13 +141,16 @@ class ProfileView extends GetView<ProfileController> {
                           child: Text('Submit'),
                           onPressed: () {
                             controller.onAdressClick();
+                            controller.getAdress();
                             Navigator.of(context).pop();
                           },
                         ),
                         TextButton(
-                          child: Text('Edit'),
+                          child: Text('Update'),
                           onPressed: () {
-                            // Implement your logic here
+                            controller.onClickUpdateAdress(
+                                controller.adrressId.value);
+                            controller.getAdress();
                             Navigator.of(context).pop();
                           },
                         ),
@@ -150,11 +160,6 @@ class ProfileView extends GetView<ProfileController> {
                 );
               }, // Implement navigation
             ),
-            // ListTile(
-            //   leading: Icon(Icons.payment),
-            //   title: Text('Payment Methods'),
-            //   onTap: () {}, // Implement navigation
-            // ),
             ListTile(
               leading: Icon(Icons.help),
               title: Text('Help'),
@@ -165,6 +170,50 @@ class ProfileView extends GetView<ProfileController> {
               title: Text('Settings'),
               onTap: () {}, // Implement navigation
             ),
+            StreamBuilder(
+              stream: controller.fetchAdress,
+              builder: (context, snapshot) {
+                if (snapshot.hasData && snapshot.data!.address!.isNotEmpty) {
+                  controller.name.value = snapshot.data!.address!.first.name!;
+                  controller.mobile.value =
+                      snapshot.data!.address!.first.mobileNumber!;
+                  controller.address.value =
+                      snapshot.data!.address!.first.address!;
+                  controller.district.value =
+                      snapshot.data!.address!.first.district!;
+                  controller.state.value = snapshot.data!.address!.first.state!;
+                  controller.pincode.value =
+                      snapshot.data!.address!.first.pinCode!;
+                  controller.country.value =
+                      snapshot.data!.address!.first.country!;
+                  controller.adrressId.value =
+                      snapshot.data!.address!.first.sId!;
+                  controller.onReady();
+
+                  return Visibility(
+                    child: Obx(() => Column(
+                          children: [
+                            Text('Name: ${controller.name.value}'),
+                            Text('Mobile: ${controller.mobile.value}'),
+                            Text('Address: ${controller.address.value}'),
+                            Text('District: ${controller.district.value}'),
+                            Text('State: ${controller.state.value}'),
+                            Text('Pincode: ${controller.pincode.value}'),
+                            Text('Country: ${controller.country.value}'),
+                          ],
+                        )),
+                    visible: true,
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else {
+                  return Text('No Adress added');
+                }
+              },
+            )
           ],
         ),
       ),

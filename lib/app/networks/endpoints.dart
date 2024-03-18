@@ -13,6 +13,7 @@ enum EndPoints {
   customerGetSingleProduct,
   customerCreateAdress,
   customerGetAdress,
+  customerUpdateAdress
 }
 
 extension EndPointsData on EndPoints {
@@ -43,6 +44,8 @@ extension EndPointsData on EndPoints {
         path = "customer/products/address/create";
       case EndPoints.customerGetAdress:
         path = "customer/products/address/display";
+      case EndPoints.customerUpdateAdress:
+        path = "customer/products/address/update";
     }
     return path;
   }
@@ -74,6 +77,8 @@ extension EndPointsData on EndPoints {
         type = ReqType.POST;
       case EndPoints.customerGetAdress:
         type = ReqType.GET;
+      case EndPoints.customerUpdateAdress:
+        type = ReqType.PUT;
     }
     return type;
   }
@@ -104,6 +109,8 @@ extension EndPointsData on EndPoints {
       case EndPoints.customerCreateAdress:
         token = true;
       case EndPoints.customerGetAdress:
+        token = true;
+      case EndPoints.customerUpdateAdress:
         token = true;
     }
     return token;

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:shopping/app/networks/dio_client.dart';
 import 'package:shopping/app/networks/endpoints.dart';
 import 'package:shopping/app/networks/network_model/req/customer_adress_create_req.dart';
+import 'package:shopping/app/networks/network_model/req/customer_update_req.dart';
 import 'package:shopping/app/networks/network_model/res/customer_create_adress_res.dart';
 import 'package:shopping/app/networks/network_model/res/customer_get_adress.dart';
 import 'package:shopping/app/networks/network_model/res/customer_get_single_product.dart';
@@ -9,6 +10,7 @@ import 'package:shopping/app/networks/network_model/res/customer_like_display.da
 import 'package:shopping/app/networks/network_model/res/customer_product_like.dart';
 import 'package:shopping/app/networks/network_model/res/customer_product_res.dart';
 import 'package:shopping/app/networks/network_model/res/customer_product_unlike.dart';
+import 'package:shopping/app/networks/network_model/res/customer_update_adress.dart';
 import 'package:shopping/app/networks/network_model/res/liked_all_data_res.dart';
 
 class CustomerProductRepo {
@@ -251,6 +253,38 @@ class CustomerProductRepo {
       }
     } catch (e) {
       return CustomerGetAdressRes(error: "Unexpected Error");
+    }
+  }
+
+  Future<CustomerUpdateAdressRes?> updateCustomerAdress(
+      CustomerUpdateAdressReq customerUpdateAdressReq, String id) async {
+    try {
+      final response = await dioClient.mainReqRes(
+        endPoints: EndPoints.customerUpdateAdress,
+        data: customerUpdateAdressReq.toJson(),
+        queryParameters: id,
+      );
+      if (response.statusCode == 200) {
+        final customerGetAdressResponse =
+            CustomerUpdateAdressRes.fromJson(response.data);
+        if (customerGetAdressResponse.updatedAddress != null) {
+          return customerGetAdressResponse;
+        } else {
+          final customerGetAdressResponse =
+              CustomerUpdateAdressRes(error: "No Product Found");
+          return customerGetAdressResponse;
+        }
+      } else {
+        final customerGetAdressResponse =
+            CustomerUpdateAdressRes.fromJson(response.data);
+        if (response.statusCode == 400) {
+          return customerGetAdressResponse;
+        } else {
+          return CustomerUpdateAdressRes.fromJson(response.data);
+        }
+      }
+    } catch (e) {
+      return CustomerUpdateAdressRes(error: "Unexpected Error");
     }
   }
 }

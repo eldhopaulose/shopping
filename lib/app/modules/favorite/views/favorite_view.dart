@@ -12,7 +12,9 @@ class FavoriteView extends GetView<FavoriteController> {
     Get.put(FavoriteController());
 
     controller.fetchCustomerAllProductLiked();
-    controller.fetchCustomerAllProductLiked();
+    Future.delayed(Duration(seconds: 1), () {
+      controller.fetchCustomerAllProductLiked();
+    });
 
     return Scaffold(
       //backgroundColor: Colors.black,
