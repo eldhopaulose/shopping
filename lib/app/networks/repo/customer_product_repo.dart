@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:shopping/app/networks/dio_client.dart';
 import 'package:shopping/app/networks/endpoints.dart';
+import 'package:shopping/app/networks/network_model/req/customer_adress_create_req.dart';
+import 'package:shopping/app/networks/network_model/res/customer_create_adress_res.dart';
+import 'package:shopping/app/networks/network_model/res/customer_get_adress.dart';
 import 'package:shopping/app/networks/network_model/res/customer_get_single_product.dart';
 import 'package:shopping/app/networks/network_model/res/customer_like_display.dart';
 import 'package:shopping/app/networks/network_model/res/customer_product_like.dart';
@@ -188,6 +191,66 @@ class CustomerProductRepo {
       }
     } catch (e) {
       return CustomerGetSingleProductRes(error: "Unexpected Error");
+    }
+  }
+
+  Future<CustomerCreateAdressRes?> createCustomerAdress(
+      CustomerCreateAdressReq customerCreateAdressReq) async {
+    try {
+      final response = await dioClient.mainReqRes(
+        endPoints: EndPoints.customerCreateAdress,
+        data: customerCreateAdressReq.toJson(),
+      );
+      if (response.statusCode == 200) {
+        final customerCreateAdressResponse =
+            CustomerCreateAdressRes.fromJson(response.data);
+        if (customerCreateAdressResponse.newAddress != null) {
+          return customerCreateAdressResponse;
+        } else {
+          final customerCreateAdressResponse =
+              CustomerCreateAdressRes(error: "No Product Found");
+          return customerCreateAdressResponse;
+        }
+      } else {
+        final customerCreateAdressResponse =
+            CustomerCreateAdressRes.fromJson(response.data);
+        if (response.statusCode == 400) {
+          return customerCreateAdressResponse;
+        } else {
+          return CustomerCreateAdressRes.fromJson(response.data);
+        }
+      }
+    } catch (e) {
+      return CustomerCreateAdressRes(error: "Unexpected Error");
+    }
+  }
+
+  Future<CustomerGetAdressRes?> getCustomerAdress() async {
+    try {
+      final response = await dioClient.mainReqRes(
+        endPoints: EndPoints.customerGetAdress,
+      );
+      if (response.statusCode == 200) {
+        final customerGetAdressResponse =
+            CustomerGetAdressRes.fromJson(response.data);
+        if (customerGetAdressResponse.address != null) {
+          return customerGetAdressResponse;
+        } else {
+          final customerGetAdressResponse =
+              CustomerGetAdressRes(error: "No Product Found");
+          return customerGetAdressResponse;
+        }
+      } else {
+        final customerGetAdressResponse =
+            CustomerGetAdressRes.fromJson(response.data);
+        if (response.statusCode == 400) {
+          return customerGetAdressResponse;
+        } else {
+          return CustomerGetAdressRes.fromJson(response.data);
+        }
+      }
+    } catch (e) {
+      return CustomerGetAdressRes(error: "Unexpected Error");
     }
   }
 }

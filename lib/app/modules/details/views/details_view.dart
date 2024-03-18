@@ -134,16 +134,30 @@ class DetailPageView extends GetView<DetailsController> {
                         height: 10,
                       ),
                       SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            CommonButton(
-                              btnButtonWidth: double.infinity,
-                              btnText: 'Buy Now',
-                              btnHeight: 50,
-                              btnOnPressed: () {
-                                // Get.to(EditPageView());
-                              },
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: CommonButton(
+                                btnButtonWidth: double.infinity,
+                                btnText: 'Buy Now',
+                                btnHeight: 50,
+                                btnOnPressed: () {
+                                  // Get.to(EditPageView());
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: CommonButton(
+                                btnButtonWidth: double.infinity,
+                                btnText: 'Add to Cart',
+                                btnHeight: 50,
+                                btnOnPressed: () {
+                                  // Get.to(EditPageView());
+                                },
+                              ),
                             ),
                             SizedBox(
                               height: 10,

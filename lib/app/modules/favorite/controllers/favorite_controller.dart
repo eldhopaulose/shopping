@@ -14,24 +14,22 @@ class FavoriteController extends GetxController {
       _fetchCustomerAllProductByLiked.stream;
 
   final StreamController<CustomerProductLikeDisplayAllRes?>
-      _fetchCustomerProductBLiked =
+      _fetchCustomerProductAllLiked =
       StreamController<CustomerProductLikeDisplayAllRes?>.broadcast();
 
   Stream<CustomerProductLikeDisplayAllRes?> get fetchCustomerProductLiked =>
-      _fetchCustomerProductBLiked.stream;
+      _fetchCustomerProductAllLiked.stream;
 
   @override
   void onInit() {
     super.onInit();
     fetchCustomerAllProductLiked();
-    fetchCustomerAllProductByLiked('');
   }
 
   @override
   void onReady() {
     super.onReady();
     fetchCustomerAllProductLiked();
-    fetchCustomerAllProductByLiked('');
   }
 
   @override
@@ -65,7 +63,7 @@ class FavoriteController extends GetxController {
     final CustomerProductRepo repo = CustomerProductRepo();
     final response = await repo.getCustomerProductLikeDisplayAll();
 
-    _fetchCustomerProductBLiked.add(response!);
+    _fetchCustomerProductAllLiked.add(response!);
     update();
   }
 }
