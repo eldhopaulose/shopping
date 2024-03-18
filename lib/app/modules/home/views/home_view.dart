@@ -212,7 +212,9 @@ class HomeView extends GetView<HomeController> {
                                 controller.selectCategory(p0);
 
                                 controller.onReady();
-                                controller.onReady();
+                                Future.delayed(Duration(seconds: 1), () {
+                                  controller.onReady();
+                                });
                               },
                             ),
                             Categories(
@@ -222,7 +224,9 @@ class HomeView extends GetView<HomeController> {
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
                                 controller.onReady();
-                                controller.onReady();
+                                Future.delayed(Duration(seconds: 1), () {
+                                  controller.onReady();
+                                });
                               },
                             ),
                             Categories(
@@ -232,7 +236,9 @@ class HomeView extends GetView<HomeController> {
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
                                 controller.onReady();
-                                controller.onReady();
+                                Future.delayed(Duration(seconds: 1), () {
+                                  controller.onReady();
+                                });
                               },
                             ),
                             Categories(
@@ -242,7 +248,9 @@ class HomeView extends GetView<HomeController> {
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
                                 controller.onReady();
-                                controller.onReady();
+                                Future.delayed(Duration(seconds: 1), () {
+                                  controller.onReady();
+                                });
                               },
                             ),
                             Categories(
@@ -252,7 +260,9 @@ class HomeView extends GetView<HomeController> {
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
                                 controller.onReady();
-                                controller.onReady();
+                                Future.delayed(Duration(seconds: 1), () {
+                                  controller.onReady();
+                                });
                               },
                             ),
                             Categories(
@@ -262,7 +272,9 @@ class HomeView extends GetView<HomeController> {
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
                                 controller.onReady();
-                                controller.onReady();
+                                Future.delayed(Duration(seconds: 1), () {
+                                  controller.onReady();
+                                });
                               },
                             ),
                             Categories(
@@ -272,7 +284,9 @@ class HomeView extends GetView<HomeController> {
                               onPressed: (p0) {
                                 controller.selectCategory(p0);
                                 controller.onReady();
-                                controller.onReady();
+                                Future.delayed(Duration(seconds: 1), () {
+                                  controller.onReady();
+                                });
                               },
                             ),
                           ],
@@ -315,7 +329,8 @@ class HomeView extends GetView<HomeController> {
                                               MediaQuery.of(context).size.width,
                                           child: InkWell(
                                             onTap: () {
-                                              Get.to(() => DetailPageView());
+                                              Get.to(() => DetailPageView(),
+                                                  arguments: a.sId.toString());
                                             },
                                             child: StreamBuilder(
                                               stream: controller

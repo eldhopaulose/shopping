@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:shopping/app/modules/favorite/controllers/favorite_controller.dart';
 import 'package:shopping/app/networks/network_model/res/customer_get_name.dart';
 import 'package:shopping/app/networks/network_model/res/customer_like_display.dart';
 import 'package:shopping/app/networks/network_model/res/customer_product_res.dart';
@@ -8,6 +9,8 @@ import 'package:shopping/app/networks/repo/auth_repo.dart';
 import 'package:shopping/app/networks/repo/customer_product_repo.dart';
 
 class HomeController extends GetxController {
+  final FavoriteController favoriteController = Get.put(FavoriteController());
+
   final selectedCategory = ''.obs;
 
   void selectCategory(String categoryName) {
@@ -70,9 +73,13 @@ class HomeController extends GetxController {
     await repo.likeProduct(productId);
     if (selectedCategory.value != 'All') {
       fetchCustomerProductByCatc(selectedCategory.value);
+      favoriteController.fetchCustomerAllProductLiked();
+      favoriteController.fetchCustomerAllProductByLiked('');
       update();
     } else {
       fetchCustomerProductByCatc('');
+      favoriteController.fetchCustomerAllProductLiked();
+      favoriteController.fetchCustomerAllProductByLiked('');
       update();
     }
   }
@@ -82,9 +89,13 @@ class HomeController extends GetxController {
     final response = await repo.unlikeProduct(Id);
     if (selectedCategory.value != 'All') {
       fetchCustomerProductByCatc(selectedCategory.value);
+      favoriteController.fetchCustomerAllProductLiked();
+      favoriteController.fetchCustomerAllProductByLiked('');
       update();
     } else {
       fetchCustomerProductByCatc('');
+      favoriteController.fetchCustomerAllProductLiked();
+      favoriteController.fetchCustomerAllProductByLiked('');
       update();
     }
   }

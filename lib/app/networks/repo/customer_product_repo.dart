@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:shopping/app/networks/dio_client.dart';
 import 'package:shopping/app/networks/endpoints.dart';
+import 'package:shopping/app/networks/network_model/res/customer_get_single_product.dart';
 import 'package:shopping/app/networks/network_model/res/customer_like_display.dart';
 import 'package:shopping/app/networks/network_model/res/customer_product_like.dart';
 import 'package:shopping/app/networks/network_model/res/customer_product_res.dart';
 import 'package:shopping/app/networks/network_model/res/customer_product_unlike.dart';
+import 'package:shopping/app/networks/network_model/res/liked_all_data_res.dart';
 
 class CustomerProductRepo {
   final DioClient dioClient = DioClient(Dio());
@@ -125,6 +127,67 @@ class CustomerProductRepo {
       }
     } catch (e) {
       return CustomerProductLikeDisplayRes(error: "Unexpected Error");
+    }
+  }
+
+  Future<CustomerProductLikeDisplayAllRes?>
+      getCustomerProductLikeDisplayAll() async {
+    try {
+      final response = await dioClient.mainReqRes(
+        endPoints: EndPoints.customerProductLikeDisplayAll,
+      );
+      if (response.statusCode == 200) {
+        final customerProductLikeDisplayAllResponse =
+            CustomerProductLikeDisplayAllRes.fromJson(response.data);
+        if (customerProductLikeDisplayAllResponse.likedProducts != null) {
+          return customerProductLikeDisplayAllResponse;
+        } else {
+          final customerProductLikeDisplayAllResponse =
+              CustomerProductLikeDisplayAllRes(error: "No Product Found");
+          return customerProductLikeDisplayAllResponse;
+        }
+      } else {
+        final customerProductLikeDisplayAllResponse =
+            CustomerProductLikeDisplayAllRes.fromJson(response.data);
+        if (response.statusCode == 400) {
+          return customerProductLikeDisplayAllResponse;
+        } else {
+          return CustomerProductLikeDisplayAllRes.fromJson(response.data);
+        }
+      }
+    } catch (e) {
+      return CustomerProductLikeDisplayAllRes(error: "Unexpected Error");
+    }
+  }
+
+  Future<CustomerGetSingleProductRes?> getCustomerSingleProduct(
+      String id) async {
+    try {
+      final response = await dioClient.mainReqRes(
+        endPoints: EndPoints.customerGetSingleProduct,
+        queryParameters: id,
+      );
+      if (response.statusCode == 200) {
+        final customerGetSingleProductResponse =
+            CustomerGetSingleProductRes.fromJson(response.data);
+        if (customerGetSingleProductResponse.product != null) {
+          return customerGetSingleProductResponse;
+        } else {
+          final customerGetSingleProductResponse =
+              CustomerGetSingleProductRes(error: "No Product Found");
+          return customerGetSingleProductResponse;
+        }
+      } else {
+        final customerGetSingleProductResponse =
+            CustomerGetSingleProductRes.fromJson(response.data);
+        if (response.statusCode == 400) {
+          return customerGetSingleProductResponse;
+        } else {
+          return CustomerGetSingleProductRes.fromJson(response.data);
+        }
+      }
+    } catch (e) {
+      return CustomerGetSingleProductRes(error: "Unexpected Error");
     }
   }
 }
