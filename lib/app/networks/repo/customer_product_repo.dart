@@ -1,9 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:shopping/app/networks/dio_client.dart';
 import 'package:shopping/app/networks/endpoints.dart';
+import 'package:shopping/app/networks/network_model/req/customer_add_cart.dart';
 import 'package:shopping/app/networks/network_model/req/customer_adress_create_req.dart';
 import 'package:shopping/app/networks/network_model/req/customer_update_req.dart';
+import 'package:shopping/app/networks/network_model/res/customer_add_cart_res.dart';
+import 'package:shopping/app/networks/network_model/res/customer_cart_delete.dart';
 import 'package:shopping/app/networks/network_model/res/customer_create_adress_res.dart';
+import 'package:shopping/app/networks/network_model/res/customer_display_cart.dart';
 import 'package:shopping/app/networks/network_model/res/customer_get_adress.dart';
 import 'package:shopping/app/networks/network_model/res/customer_get_single_product.dart';
 import 'package:shopping/app/networks/network_model/res/customer_like_display.dart';
@@ -285,6 +289,96 @@ class CustomerProductRepo {
       }
     } catch (e) {
       return CustomerUpdateAdressRes(error: "Unexpected Error");
+    }
+  }
+
+  Future<CustomerAddCartRes?> addCart(
+      CustomerAddCartReq customerAddCartReq) async {
+    try {
+      final response = await dioClient.mainReqRes(
+        endPoints: EndPoints.customerAddCart,
+        data: customerAddCartReq.toJson(),
+      );
+      if (response.statusCode == 200) {
+        final customerAddCartResponse =
+            CustomerAddCartRes.fromJson(response.data);
+        if (customerAddCartResponse.newCart != null) {
+          return customerAddCartResponse;
+        } else {
+          final customerAddCartResponse =
+              CustomerAddCartRes(error: "No Product Found");
+          return customerAddCartResponse;
+        }
+      } else {
+        final customerAddCartResponse =
+            CustomerAddCartRes.fromJson(response.data);
+        if (response.statusCode == 400) {
+          return customerAddCartResponse;
+        } else {
+          return CustomerAddCartRes.fromJson(response.data);
+        }
+      }
+    } catch (e) {
+      return CustomerAddCartRes(error: "Unexpected Error");
+    }
+  }
+
+  Future<CustomerDisplayCartRes?> displayCart() async {
+    try {
+      final response = await dioClient.mainReqRes(
+        endPoints: EndPoints.customerDisplayCart,
+      );
+      if (response.statusCode == 200) {
+        final customerDisplayCartResponse =
+            CustomerDisplayCartRes.fromJson(response.data);
+        if (customerDisplayCartResponse.cart != null) {
+          return customerDisplayCartResponse;
+        } else {
+          final customerDisplayCartResponse =
+              CustomerDisplayCartRes(error: "No Product Found");
+          return customerDisplayCartResponse;
+        }
+      } else {
+        final customerDisplayCartResponse =
+            CustomerDisplayCartRes.fromJson(response.data);
+        if (response.statusCode == 400) {
+          return customerDisplayCartResponse;
+        } else {
+          return CustomerDisplayCartRes.fromJson(response.data);
+        }
+      }
+    } catch (e) {
+      return CustomerDisplayCartRes(error: "Unexpected Error");
+    }
+  }
+
+  Future<CustomerDeleteCartRes?> deleteCart(String id) async {
+    try {
+      final response = await dioClient.mainReqRes(
+        endPoints: EndPoints.customerDeleteCart,
+        queryParameters: id,
+      );
+      if (response.statusCode == 200) {
+        final customerDeleteCartResponse =
+            CustomerDeleteCartRes.fromJson(response.data);
+        if (customerDeleteCartResponse.message != null) {
+          return customerDeleteCartResponse;
+        } else {
+          final customerDeleteCartResponse =
+              CustomerDeleteCartRes(error: "No Product Found");
+          return customerDeleteCartResponse;
+        }
+      } else {
+        final customerDeleteCartResponse =
+            CustomerDeleteCartRes.fromJson(response.data);
+        if (response.statusCode == 400) {
+          return customerDeleteCartResponse;
+        } else {
+          return CustomerDeleteCartRes.fromJson(response.data);
+        }
+      }
+    } catch (e) {
+      return CustomerDeleteCartRes(error: "Unexpected Error");
     }
   }
 }

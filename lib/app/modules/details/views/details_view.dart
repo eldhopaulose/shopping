@@ -155,7 +155,7 @@ class DetailPageView extends GetView<DetailsController> {
                                 btnText: 'Add to Cart',
                                 btnHeight: 50,
                                 btnOnPressed: () {
-                                  // Get.to(EditPageView());
+                                  controller.onClickCart(arg);
                                 },
                               ),
                             ),
