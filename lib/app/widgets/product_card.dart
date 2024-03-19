@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping/app/data/colors.dart';
 import 'package:shopping/app/modules/home/controllers/home_controller.dart';
 import 'package:shopping/app/networks/network_model/res/customer_product_like.dart';
@@ -120,7 +121,7 @@ class ProductCard extends StatelessWidget {
                           name,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: TextStyle(
+                          style: GoogleFonts.grenze(
                             fontWeight: FontWeight.w600,
                             fontSize: 18,
                             color: AppColor.darkBlue,
@@ -129,7 +130,7 @@ class ProductCard extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              disprice,
+                              "₹ ${disprice}",
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 16,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping/app/modules/details/views/details_view.dart';
 import 'package:shopping/app/widgets/product_card.dart';
 import '../controllers/favorite_controller.dart';
@@ -22,10 +23,12 @@ class FavoriteView extends GetView<FavoriteController> {
         backgroundColor: Colors.white, // Added this line
         elevation: 0.0, // Added this line
         title: Center(
-          child: Text(
-            'Favorite',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+          child: Text('Favorite',
+              style: GoogleFonts.castoro(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                // You can set the color of the text
+              )),
         ),
       ),
       body: SingleChildScrollView(

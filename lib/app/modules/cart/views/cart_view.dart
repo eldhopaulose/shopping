@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping/app/modules/cart/controllers/cart_controller.dart';
+import 'package:shopping/app/networks/network_model/res/customer_display_cart.dart';
 
 class CartView extends GetView<CartController> {
   @override
@@ -15,7 +17,11 @@ class CartView extends GetView<CartController> {
         title: Center(
           child: Text(
             'My Cart',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: GoogleFonts.castoro(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              // You can set the color of the text
+            ),
           ),
         ),
       ),
@@ -31,17 +37,23 @@ class CartView extends GetView<CartController> {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData) {
+                  return Center(child: Text('No data available'));
                 } else {
                   return ListView.builder(
                     itemCount: snapshot.data!.cart!.length,
                     itemBuilder: (context, index) {
                       final item = snapshot.data!.cart![index];
+                      controller.totalPrice.value +=
+                          double.parse(item.product!.discount!);
                       return Dismissible(
                         key: Key(
                             item.sId!.toString()), // unique key for Dismissible
                         onDismissed: (direction) {
                           controller.onCartDelete(item.sId!);
-                          controller.fetchCustomerCartDisplayAll();
+                          Future.delayed(Duration(seconds: 1), () {
+                            controller.fetchCustomerCartDisplayAll();
+                          });
                         },
                         child: Container(
                           margin: EdgeInsets.only(
@@ -52,52 +64,62 @@ class CartView extends GetView<CartController> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: ListTile(
-                            title: Text(
-                                snapshot.data!.cart![index].product!.name!),
+                            title:
+                                Text(snapshot.data!.cart![index].product!.name!,
+                                    style: GoogleFonts.grenze(
+                                      // Set the font size to 20
+                                      fontSize: 18,
+                                    )),
                             subtitle: Text(
-                                '₹ ${snapshot.data!.cart![index].product!.discount!}'),
+                                '₹ ${snapshot.data!.cart![index].product!.discount!}',
+                                style: GoogleFonts.grenze(
+                                  fontSize: 15,
+                                )),
                             leading: Image.network(
                                 snapshot.data!.cart![index].product!.image![0],
                                 width: 100),
-                            trailing: Container(
-                              padding: EdgeInsets.all(8.0), // Add some padding
-                              decoration: BoxDecoration(
-                                color: Colors.white, // Set the color of the box
-                                borderRadius: BorderRadius.circular(
-                                    10), // Set the border radius
-                                boxShadow: [
-                                  // Add a shadow effect
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    spreadRadius: 5,
-                                    blurRadius: 7,
-                                    offset: Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(Icons.remove,
-                                        color: Colors.green, size: 15.0),
-                                    onPressed: () => print('Laptop'),
-                                  ),
-                                  Text(
-                                    '4',
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight
-                                            .bold), // Increase the font size to 24 and make it bold
-                                  ),
-                                  IconButton(
-                                    icon: Icon(Icons.add,
-                                        color: Colors.green, size: 15.0),
-                                    onPressed: () => print,
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // trailing: Container(
+                            //   padding: EdgeInsets.all(8.0), // Add some padding
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.white, // Set the color of the box
+                            //     borderRadius: BorderRadius.circular(
+                            //         10), // Set the border radius
+                            //     boxShadow: [
+                            //       // Add a shadow effect
+                            //       BoxShadow(
+                            //         color: Colors.grey.withOpacity(0.1),
+                            //         spreadRadius: 5,
+                            //         blurRadius: 7,
+                            //         offset: Offset(0, 3),
+                            //       ),
+                            //     ],
+                            //   ),
+                            //   child: Row(
+                            //     mainAxisSize: MainAxisSize.min,
+                            //     children: [
+                            //       IconButton(
+                            //         icon: Icon(Icons.remove,
+                            //             color: Colors.green, size: 15.0),
+                            //         onPressed: () =>
+                            //             controller.decreaseItemQuantity(
+                            //                 index), // Increase the quantity
+                            //       ),
+                            //       Obx(() => Text(
+                            //             controller.quantity.toString(),
+                            //             style: TextStyle(
+                            //                 fontSize: 17,
+                            //                 fontWeight: FontWeight
+                            //                     .bold), // Increase the font size to 24 and make it bold
+                            //           )),
+                            //       IconButton(
+                            //         icon: Icon(Icons.add,
+                            //             color: Colors.green, size: 15.0),
+                            //         onPressed: () =>
+                            //             controller.increaseItemQuantity(index),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                           ),
                         ),
                       );
@@ -108,7 +130,7 @@ class CartView extends GetView<CartController> {
             )),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
@@ -118,13 +140,19 @@ class CartView extends GetView<CartController> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
-                  Text(
-                    '₹ 1500',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 40, 167, 45),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
+                  StreamBuilder(
+                    stream: controller.fetchCustomerCartDisplay,
+                    builder: (context, snapshot) {
+                      return Text(
+                        '₹ ${snapshot.data?.totalPrice.toString() ?? "0"}',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 40, 167, 45),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      );
+                    },
+                  )
                 ],
               ),
             ),

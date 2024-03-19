@@ -46,9 +46,9 @@ class HomeView extends GetView<HomeController> {
                               } else {
                                 return Text(
                                   "Hello, ${snapshot.data!.name}",
-                                  style: GoogleFonts.lobster(
+                                  style: GoogleFonts.tomorrow(
                                     fontSize: 25,
-                                    color: Colors.black,
+                                    color: Colors.green,
                                   ),
                                   textAlign: TextAlign.left,
                                 );

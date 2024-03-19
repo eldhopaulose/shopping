@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping/app/data/colors.dart';
 import 'package:shopping/app/modules/details/controllers/details_controller.dart';
 import 'package:shopping/app/widgets/common_button.dart';
@@ -17,10 +18,10 @@ class DetailPageView extends GetView<DetailsController> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: false,
-          title: const Text('Product Details',
-              style: TextStyle(
+          title: Text('Product Details',
+              style: GoogleFonts.grenze(
                 color: AppColor.green,
-                fontSize: 22,
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
               ) // You can set the color of the text
               ),
@@ -78,7 +79,7 @@ class DetailPageView extends GetView<DetailsController> {
                       ),
                       Text(
                         snapshot.data!.product!.name!,
-                        style: TextStyle(
+                        style: GoogleFonts.grenze(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
@@ -89,7 +90,7 @@ class DetailPageView extends GetView<DetailsController> {
                       Row(
                         children: [
                           Text(
-                            snapshot.data!.product!.discount!,
+                            '₹ ${snapshot.data!.product!.discount!}',
                             style: TextStyle(
                               fontSize: 22,
                               color: AppColor.green,
@@ -100,7 +101,7 @@ class DetailPageView extends GetView<DetailsController> {
                             width: 10,
                           ),
                           Text(
-                            snapshot.data!.product!.price!,
+                            '₹ ${snapshot.data!.product!.price!}',
                             style: TextStyle(
                               decoration: TextDecoration.lineThrough,
                               fontSize: 20,
@@ -115,7 +116,7 @@ class DetailPageView extends GetView<DetailsController> {
                       ),
                       Text(
                         'About',
-                        style: TextStyle(
+                        style: GoogleFonts.grenze(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -125,9 +126,9 @@ class DetailPageView extends GetView<DetailsController> {
                       ),
                       Text(
                         snapshot.data!.product!.about!,
-                        style: TextStyle(
+                        style: GoogleFonts.lindenHill(
                           fontSize: 18,
-                          color: AppColor.darkGrey,
+                          color: const Color.fromARGB(255, 155, 150, 146),
                         ),
                       ),
                       SizedBox(

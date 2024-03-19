@@ -1,8 +1,9 @@
 class CustomerDisplayCartRes {
   String? error;
   List<Cart>? cart;
+  int? totalPrice;
 
-  CustomerDisplayCartRes({this.error, this.cart});
+  CustomerDisplayCartRes({this.error, this.cart, this.totalPrice});
 
   CustomerDisplayCartRes.fromJson(Map<String, dynamic> json) {
     error = json['error'];
@@ -12,6 +13,7 @@ class CustomerDisplayCartRes {
         cart!.add(new Cart.fromJson(v));
       });
     }
+    totalPrice = json['totalPrice'];
   }
 
   Map<String, dynamic> toJson() {
@@ -20,6 +22,7 @@ class CustomerDisplayCartRes {
     if (this.cart != null) {
       data['cart'] = this.cart!.map((v) => v.toJson()).toList();
     }
+    data['totalPrice'] = this.totalPrice;
     return data;
   }
 }

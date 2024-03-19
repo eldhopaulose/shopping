@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping/app/data/colors.dart';
 
 class CommonButton extends StatelessWidget {
@@ -27,7 +27,7 @@ class CommonButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(btnText,
-              style: TextStyle(
+              style: GoogleFonts.grenze(
                 color: AppColor.white,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

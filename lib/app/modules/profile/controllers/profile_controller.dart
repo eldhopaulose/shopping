@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:shopping/app/networks/network_model/req/customer_adress_create_req.dart';
 import 'package:shopping/app/networks/network_model/req/customer_update_req.dart';
 import 'package:shopping/app/networks/network_model/res/customer_get_adress.dart';
+import 'package:shopping/app/networks/network_model/res/customer_get_name.dart';
 import 'package:shopping/app/networks/network_model/res/customer_update_adress.dart';
+import 'package:shopping/app/networks/repo/auth_repo.dart';
 import 'package:shopping/app/networks/repo/customer_product_repo.dart';
 
 class ProfileController extends GetxController {
@@ -102,5 +104,12 @@ class ProfileController extends GetxController {
     } else {
       Get.snackbar('Error', 'Address Not Updated');
     }
+  }
+
+  Future<CustomerGetNameRes?> featchName() async {
+    final AuthRepo repo = AuthRepo();
+    final response = await repo.getUserDetails();
+
+    return response;
   }
 }
