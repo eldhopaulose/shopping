@@ -30,7 +30,7 @@ class RegisterView extends GetView<RegisterController> {
                 children: [
                   // Add the missing image here
                   Image.asset(
-                    'assets/images/logo2.jpg',
+                    'assets/images/logo2.png',
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width,
                     height: 300,
@@ -38,7 +38,7 @@ class RegisterView extends GetView<RegisterController> {
 
                   Positioned(
                     left: 0,
-                    top: 200,
+                    top: 210,
                     child: Container(
                       height: MediaQuery.of(context).size.height * 80,
                       width: MediaQuery.of(context).size.width,

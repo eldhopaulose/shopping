@@ -14,8 +14,5 @@ void main() {
     initialRoute: AppPages.INITIAL,
     getPages: AppPages.routes,
     debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      textTheme: GoogleFonts.grenzeTextTheme(),
-    ),
   ));
 }

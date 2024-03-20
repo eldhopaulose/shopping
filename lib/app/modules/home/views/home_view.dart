@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping/app/modules/details/views/details_view.dart';
@@ -33,37 +34,52 @@ class HomeView extends GetView<HomeController> {
                   padding: const EdgeInsets.all(18.0),
                   child: Container(
                     height: 60,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        FutureBuilder(
-                            future: controller.featchName(),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return CircularProgressIndicator();
-                              } else {
-                                return Text(
-                                  "Hello, ${snapshot.data!.name}",
-                                  style: GoogleFonts.tomorrow(
-                                    fontSize: 25,
-                                    color: Colors.green,
-                                  ),
-                                  textAlign: TextAlign.left,
-                                );
-                              }
-                            }),
-                        const SizedBox(
-                          height: 2,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            FutureBuilder(
+                                future: controller.featchName(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return CircularProgressIndicator();
+                                  } else {
+                                    return Text(
+                                      "Hi ${snapshot.data!.name},",
+                                      style: GoogleFonts.oldStandardTt(
+                                        fontSize: 25,
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                    );
+                                  }
+                                }),
+                            const SizedBox(
+                              height: 2,
+                            ),
+                            Text(
+                              "Let's get something...!",
+                              style: GoogleFonts.lobster(
+                                fontSize: 15,
+                                color: Color.fromARGB(255, 107, 113, 119),
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          ],
                         ),
                         Text(
-                          "Let's get something...!",
-                          style: GoogleFonts.lobster(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 107, 113, 119),
+                          'nosta',
+                          style: GoogleFonts.rubikVinyl(
+                            fontSize: 35,
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
                           ),
-                          textAlign: TextAlign.left,
                         ),
                       ],
                     ),

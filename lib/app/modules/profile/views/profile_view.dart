@@ -143,7 +143,10 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       actions: <Widget>[
                         TextButton(
-                          child: Text('Featch Adress'),
+                          child: Text(
+                            'Featch Adress',
+                            style: GoogleFonts.grenze(color: Colors.green),
+                          ),
                           onPressed: () {
                             controller.getAdress();
                             controller.getAdress();
@@ -155,7 +158,8 @@ class ProfileView extends GetView<ProfileController> {
                         ),
                         TextButton(
                           child: Text('Submit',
-                              style: GoogleFonts.grenze(fontSize: 18)),
+                              style: GoogleFonts.grenze(
+                                  fontSize: 18, color: Colors.green)),
                           onPressed: () {
                             controller.onAdressClick();
                             controller.getAdress();
@@ -163,7 +167,8 @@ class ProfileView extends GetView<ProfileController> {
                           },
                         ),
                         TextButton(
-                          child: Text('Update'),
+                          child: Text('Update',
+                              style: GoogleFonts.grenze(color: Colors.green)),
                           onPressed: () {
                             controller.onClickUpdateAdress(
                                 controller.adrressId.value);
