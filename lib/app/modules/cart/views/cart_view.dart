@@ -179,7 +179,7 @@ class CartView extends GetView<CartController> {
             ),
             SizedBox(
               height: 20,
-            )
+            ),
           ],
         ),
       ),

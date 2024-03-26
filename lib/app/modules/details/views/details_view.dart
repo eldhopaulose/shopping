@@ -145,7 +145,8 @@ class DetailPageView extends GetView<DetailsController> {
                                 btnText: 'Buy Now',
                                 btnHeight: 50,
                                 btnOnPressed: () {
-                                  // Get.to(EditPageView());
+                                  controller.buyNow(double.parse(
+                                      snapshot.data!.product!.discount!));
                                 },
                               ),
                             ),

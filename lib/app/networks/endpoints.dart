@@ -17,6 +17,7 @@ enum EndPoints {
   customerAddCart,
   customerDisplayCart,
   customerDeleteCart,
+  booking,
 }
 
 extension EndPointsData on EndPoints {
@@ -55,6 +56,8 @@ extension EndPointsData on EndPoints {
         path = "customer/products/cart/display";
       case EndPoints.customerDeleteCart:
         path = "customer/products/cart/delete";
+      case EndPoints.booking:
+        path = "customer/booking/addBooking";
     }
     return path;
   }
@@ -94,6 +97,8 @@ extension EndPointsData on EndPoints {
         type = ReqType.GET;
       case EndPoints.customerDeleteCart:
         type = ReqType.DELETE;
+      case EndPoints.booking:
+        type = ReqType.POST;
     }
     return type;
   }
@@ -132,6 +137,8 @@ extension EndPointsData on EndPoints {
       case EndPoints.customerDisplayCart:
         token = true;
       case EndPoints.customerDeleteCart:
+        token = true;
+      case EndPoints.booking:
         token = true;
     }
     return token;
