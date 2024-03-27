@@ -1,4 +1,6 @@
 class BookingReq {
+  String? error;
+  String? name;
   String? bookingDate;
   String? bookingTime;
   String? userId;
@@ -7,7 +9,9 @@ class BookingReq {
   List<String>? product;
 
   BookingReq(
-      {this.bookingDate,
+      {this.error,
+      this.name,
+      this.bookingDate,
       this.bookingTime,
       this.userId,
       this.address,
@@ -15,6 +19,8 @@ class BookingReq {
       this.product});
 
   BookingReq.fromJson(Map<String, dynamic> json) {
+    error = json['error'];
+    name = json['name'];
     bookingDate = json['bookingDate'];
     bookingTime = json['bookingTime'];
     userId = json['userId'];
@@ -25,6 +31,8 @@ class BookingReq {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['error'] = this.error;
+    data['name'] = this.name;
     data['bookingDate'] = this.bookingDate;
     data['bookingTime'] = this.bookingTime;
     data['userId'] = this.userId;

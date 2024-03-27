@@ -93,10 +93,11 @@ class CartController extends GetxController {
     final responseUser = await repoUser.getUserDetails();
 
     responseCart!.cart!.forEach((element) {
-      cartId.addAll([element.sId!]);
+      cartId.addAll([element.product!.sId]);
     });
 
     final response = await repo.booking(BookingReq(
+      name: responseUser!.name,
       address: [
         responseAdd!.address![0].address! +
             "" +

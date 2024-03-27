@@ -138,20 +138,20 @@ class DetailPageView extends GetView<DetailsController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            // SizedBox(
+                            //   width: MediaQuery.of(context).size.width * 0.4,
+                            //   child: CommonButton(
+                            //     btnButtonWidth: double.infinity,
+                            //     btnText: 'Buy Now',
+                            //     btnHeight: 50,
+                            //     btnOnPressed: () {
+                            //       controller.buyNow(double.parse(
+                            //           snapshot.data!.product!.discount!));
+                            //     },
+                            //   ),
+                            // ),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              child: CommonButton(
-                                btnButtonWidth: double.infinity,
-                                btnText: 'Buy Now',
-                                btnHeight: 50,
-                                btnOnPressed: () {
-                                  controller.buyNow(double.parse(
-                                      snapshot.data!.product!.discount!));
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.4,
+                              width: MediaQuery.of(context).size.width * 0.9,
                               child: CommonButton(
                                 btnButtonWidth: double.infinity,
                                 btnText: 'Add to Cart',
